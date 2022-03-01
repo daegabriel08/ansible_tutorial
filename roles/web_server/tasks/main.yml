@@ -1,17 +1,23 @@
-- name: install apache2 package (Ubuntu)
+- name: install apache and php packages
   tags: apache,apache2,ubuntu
-  apt:
+  package:
     name:
-      - apache2
-      - libapache2-mod-php
+      - "{{ apache_package_name }}"
+      - "{{ php_package_name }}"
     state: latest
-  when: ansible_distribution == "Ubuntu"
 
-- name: restart apache (ubuntu)
+- name: start and enable apache services
   tags: apache,ubuntu,apache2
   service:
-    name: apache2
-    state: restarted  
+    name: "{{ apache_service }}"
+    state: started
+    enabled: yes  
+
+- name: restart apache
+  tags: apache,apache2,ubuntu
+  service:
+    name: "{{ apache_service }}"
+    state: restarted
  
 - name: copy html file for site
   tags: apache,apache,apache2
