@@ -6,3 +6,6 @@ user@192.168.254.140
 
 [file_server]
 user@192.168.254.141
+
+[workstations]
+user@192.168.254.141

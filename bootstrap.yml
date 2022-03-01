@@ -1,0 +1,37 @@
+---
+
+- hosts: all
+  become: true
+  pre_tasks:
+
+  - name: install updates (Ubuntu)
+    tags: always
+    apt:
+      upgrade: dist
+      update_cache: yes
+    when: ansible_distribution == "Ubuntu"
+
+- hosts: all
+  become: true
+  tasks:
+
+  - name: create dahyun user
+    tags: always
+    user:
+      name: dahyun
+      groups: root
+
+  - name: add ssh key for dahyun
+    tags: always
+    authorized_key:
+      user: dahyun
+      key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKhOXMtU/RGepcT7wgamk3mFHotdrhnenktrQNZugqaJ ansible take two"
+
+  - name: add sudoers file for dahyun
+    tags: always
+    copy:
+      src: sudoer_dahyun
+      dest: /etc/sudoers.d/dahyun
+      owner: root
+      group: root
+      mode: 0440
