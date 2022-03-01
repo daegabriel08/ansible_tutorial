@@ -1,0 +1,4 @@
+- name: add ssh key for dahyun
+  authorized_key:
+    user: dahyun
+    key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKhOXMtU/RGepcT7wgamk3mFHotdrhnenktrQNZugqaJ ansible take two"
